@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_API_URL || '/api',
 });
 
 API.interceptors.request.use((config) => {
@@ -12,14 +12,19 @@ API.interceptors.request.use((config) => {
   return config;
 });
 
+// Response interceptor — handle 401s
 API.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && error.response.status === 401) {
+    const isAuthEndpoint = 
+      error.config?.url?.includes('/auth/login') ||
+      error.config?.url?.includes('/auth/signup');
+
+    if (error.response?.status === 401 && !isAuthEndpoint) {
       localStorage.removeItem('token');
-      localStorage.removeItem('user');
       window.location.href = '/login';
     }
+
     return Promise.reject(error);
   }
 );

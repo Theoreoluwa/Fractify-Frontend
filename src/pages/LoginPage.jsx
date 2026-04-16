@@ -30,10 +30,7 @@ export default function LoginPage() {
       login(res.data.access_token, res.data.user);
       navigate("/upload");
     } catch (err) {
-      setError(
-        err.response?.data?.detail ||
-          "Login failed. Please check your credentials.",
-      );
+      setError(err.response?.data?.detail || "Invalid login credentials");
     } finally {
       setLoading(false);
     }
