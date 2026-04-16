@@ -120,7 +120,7 @@ export default function HistoryPage() {
                         <div className="w-14 h-14 bg-black/30 rounded-lg overflow-hidden flex-shrink-0">
                           {upload.file_path && (
                             <img
-                              src={`/uploads/xrays/${upload.file_path.split(/[/\\]/).pop()}`}
+                              src={upload.file_path}
                               alt="X-ray"
                               className="w-full h-full object-cover"
                             />

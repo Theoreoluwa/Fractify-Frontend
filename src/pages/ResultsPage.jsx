@@ -176,13 +176,13 @@ export default function ResultsPage() {
             <div className="bg-[#0a1628] border border-white/8 rounded-2xl p-4 overflow-hidden">
               {result?.annotated_path ? (
                 <img
-                  src={`/uploads/xrays/${result.annotated_path.split(/[/\\]/).pop()}`}
+                  src={result.annotated_path}
                   alt="Annotated X-ray"
                   className="w-full rounded-xl"
                 />
               ) : result?.file_path ? (
                 <img
-                  src={`/uploads/xrays/${result.file_path.split(/[/\\]/).pop()}`}
+                  src={result.file_path}
                   alt="Original X-ray"
                   className="w-full rounded-xl"
                 />
@@ -302,7 +302,7 @@ export default function ResultsPage() {
                                     ROI Crop
                                   </p>
                                   <img
-                                    src={`/uploads/xrays/${pred.roi_image_path.split(/[/\\]/).pop()}`}
+                                    src={pred.roi_image_path}
                                     alt={`${pred.region_class} ROI`}
                                     className="w-full rounded-lg border border-white/8"
                                   />
@@ -314,7 +314,7 @@ export default function ResultsPage() {
                                     Grad-CAM Heatmap
                                   </p>
                                   <img
-                                    src={`/uploads/gradcam/${pred.gradcam_image_path.split(/[/\\]/).pop()}`}
+                                    src={pred.gradcam_image_path}
                                     alt={`${pred.region_class} Grad-CAM`}
                                     className="w-full rounded-lg border border-white/8"
                                   />
