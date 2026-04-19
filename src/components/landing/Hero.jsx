@@ -40,7 +40,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="text-base md:text-lg text-slate-400 leading-relaxed mb-10 max-w-md"
         >
-          Fractify uses a two-stage AI pipeline to detect anatomical regions in hand
+          Fractify uses a three-stage AI pipeline to detect anatomical regions in hand
           and wrist X-rays, classify fractures, and provide
           visual explanations to support clinical decision-making.
         </motion.p>
