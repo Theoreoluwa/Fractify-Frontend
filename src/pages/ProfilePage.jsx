@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { HiOutlineUser, HiOutlineEnvelope, HiOutlineKey } from 'react-icons/hi2';
 import Navbar from '../components/common/Navbar';
@@ -8,52 +8,12 @@ import API from '../api/axios';
 
 export default function ProfilePage() {
   const { user, logout } = useAuth();
-  const [showPasswordForm, setShowPasswordForm] = useState(false);
-  const [passwordData, setPasswordData] = useState({
-    current_password: '',
-    new_password: '',
-    confirm_password: '',
-  });
-  const [passwordError, setPasswordError] = useState('');
-  const [passwordSuccess, setPasswordSuccess] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handlePasswordChange = (e) => {
-    setPasswordData({ ...passwordData, [e.target.name]: e.target.value });
-    setPasswordError('');
-    setPasswordSuccess('');
-  };
+    useEffect(() => {
+      document.title = "Fractify | Profile";
+    })
 
-  const handlePasswordSubmit = async (e) => {
-    e.preventDefault();
-
-    if (passwordData.new_password !== passwordData.confirm_password) {
-      setPasswordError('New passwords do not match.');
-      return;
-    }
-
-    if (passwordData.new_password.length < 8) {
-      setPasswordError('New password must be at least 8 characters.');
-      return;
-    }
-
-    setLoading(true);
-    try {
-      await API.put('/auth/change-password', null, {
-        params: {
-          current_password: passwordData.current_password,
-          new_password: passwordData.new_password,
-        },
-      });
-      setPasswordSuccess('Password updated successfully.');
-      setPasswordData({ current_password: '', new_password: '', confirm_password: '' });
-      setShowPasswordForm(false);
-    } catch (err) {
-      setPasswordError(err.response?.data?.detail || 'Failed to update password.');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);

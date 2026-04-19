@@ -13,6 +13,10 @@ export default function HistoryPage() {
   const [error, setError] = useState('');
   const [deleting, setDeleting] = useState(null);
 
+    useEffect(() => {
+    document.title = "Fractify | History";
+  })
+
   useEffect(() => {
     fetchUploads();
   }, []);

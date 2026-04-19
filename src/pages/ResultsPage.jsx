@@ -23,6 +23,10 @@ export default function ResultsPage() {
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [generatingReport, setGeneratingReport] = useState(false);
 
+    useEffect(() => {
+    document.title = "Fractify | Analysis Results";
+  })
+
   useEffect(() => {
     fetchResults();
   }, [id]);
